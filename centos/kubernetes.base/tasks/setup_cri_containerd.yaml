@@ -1,0 +1,30 @@
+---
+
+- name: Creating a config file for containerd
+  file: 
+    path: /etc/modules-load.d/containerd.conf
+    state: touch
+    
+- name: Settting up containerd conf
+  blockinfile:
+    path: /etc/modules-load.d/containerd.conf
+    block: |
+      overlay
+      br_netfilter
+
+- name: Creating a kubernetes CRI configuration file
+  file: 
+    path: /etc/sysctl.d/99-kubernetes-cri.conf
+    state: touch
+
+- name: Settting up containerd as CRI
+  blockinfile:
+    path: /etc/sysctl.d/99-kubernetes-cri.conf
+    block: |
+      net.bridge.bridge-nf-call-iptables  = 1
+      net.ipv4.ip_forward                 = 1
+      net.bridge.bridge-nf-call-ip6tables = 1
+
+- name: Apply CRI setup
+  shell: |
+    sysctl --system

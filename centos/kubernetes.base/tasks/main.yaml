@@ -1,0 +1,13 @@
+---
+
+- name: Prerequisites
+  include: prerequisites.yaml
+
+- name: Setup containerd CRI
+  include: setup_cri_containerd.yaml
+
+- name: Setup kubernetes
+  include: setup_kubernetes.yaml
+
+- name: Prepare firewall
+  include: setup_firewalld.yaml

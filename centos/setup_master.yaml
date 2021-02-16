@@ -1,0 +1,5 @@
+- hosts: kubernetes_master_nodes
+  become: yes
+  roles:
+    - role: kubernetes.base
+    - role: kubernetes.master

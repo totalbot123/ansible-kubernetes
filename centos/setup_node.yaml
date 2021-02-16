@@ -1,0 +1,5 @@
+- hosts: kubernetes_worker_nodes
+  become: yes
+  roles:
+    - role: kubernetes.base
+    - role: kubernetes.node
